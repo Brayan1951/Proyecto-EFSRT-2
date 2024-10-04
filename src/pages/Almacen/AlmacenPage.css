@@ -1,0 +1,89 @@
+/* input busqueda */
+
+.select-sede {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 10px;
+}
+
+.select-sede select {
+    width: 50%;
+    height: 30px;
+}
+
+
+/* find busqueda */
+
+.find-products {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+
+.find-products input[type="text"] {
+    position: relative;
+    width: 72%;
+    height: 30px;
+    padding: 10px 5px;
+    /* border: none;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black; */
+    border: 1px solid black;
+}
+.find-products button{
+    padding: 5px;
+    border: 1px solid black;
+    
+}
+.find-products button img{
+    display: block;
+    width: 35px;
+    /* width: 100%; */
+    object-fit: fill;
+    
+}
+
+.add{
+    border-right: none;
+    /* background-color: rgb(94, 177, 94); */
+    border-radius: 5px 0 0 5px;
+}
+.find{
+    border-left: none;
+    /* background-color: yellow; */
+    border-radius: 0 5px 5px 0;
+    
+}
+
+
+/* table */
+.table-list{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-height: 700px;
+    overflow-y: scroll;
+}
+
+table{
+    
+    width: 80%;
+    background-color: white;
+    border-collapse: collapse;
+    text-align: center;
+}
+thead{
+    background-color: rgb(101, 101, 101);
+}
+/* even */
+tbody tr:nth-child(odd){
+    background-color: rgb(206, 206, 206);
+}
+
+th,td{
+    border: 1px solid black;
+}

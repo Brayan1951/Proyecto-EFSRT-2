@@ -1,0 +1,10 @@
+.table-list button {
+    background-color: #9AE89D;
+    margin: 5px 0;
+    padding: 7px 10px;
+    border: 0;
+}
+.table-list button:hover {
+    background-color: #68a76a;
+    cursor: pointer;
+}
