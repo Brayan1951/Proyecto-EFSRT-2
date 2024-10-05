@@ -2,20 +2,37 @@ import React from 'react'
 import './AlmacenPage.css'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import { getAllProdcutosAlmacen } from '../../data/Almacenes'
-import { getByCodigo } from '../../data/Products'
+import { useAlmacenStore } from '../../store/AlmacenStore'
+import { useProductStore } from '../../store/productsStore'
+import { useForm } from '../../hooks/useForm'
+
+
+
 export default function AlmacenPage() {
 
   const [productAlmacen, setProductAlmacen] = useState([])
+  const { almacen_producto } = useAlmacenStore()
+  const { products } = useProductStore()
+
+  // const [, set] = useState(second)
+  const {almacen,changeForm}=useForm({almacen:0})
+
+  function getCodigoProducto(codigo) {
+    return products.filter(val => val.id === codigo)[0]
+  }
 
 
   useEffect(() => {
 
-    const productos_almacen = getAllProdcutosAlmacen()
-    console.log(productos_almacen);
-    setProductAlmacen(productos_almacen)
-        
+    setProductAlmacen(almacen_producto)
+
   }, [])
+
+
+  function FilterData() {
+    console.log(almacen);
+    
+  }
 
 
   return (
@@ -23,11 +40,11 @@ export default function AlmacenPage() {
       <div className="select-sede">
 
         <label htmlFor="">Seleccionar Tienda de Filtro</label>
-        <select>
+        <select name='almacen' onChange={changeForm} value={almacen}>
 
-          <option value="">Todos</option>
-          <option value="">Callao 01</option>
-          <option value="">Callao 02</option>
+          <option value="1">Todos</option>
+          <option value="2">Callao 01</option>
+          <option value="3">Callao 02</option>
         </select>
 
       </div>
@@ -37,7 +54,7 @@ export default function AlmacenPage() {
           
         </button> */}
         <input type="text" />
-        <button className='find'>
+        <button className='find' onClick={()=>FilterData()}>
           <img src='./assets/find.png' />
         </button>
       </div>
@@ -57,16 +74,16 @@ export default function AlmacenPage() {
           <tbody>
 
             {
-              productAlmacen.map(({id_almacen,id_producto,cantidad},id) => {
+              productAlmacen.map(({ id_almacen, id_producto, cantidad }, id) => {
                 return (
 
                   <tr key={id}>
-                  <td>{id_producto}</td>
-                  <td>{getByCodigo(id_producto).nombre}</td>
-                  <td>{getByCodigo(id_producto).marcas}</td>
-                  <td>{id_almacen}</td>
-                  <td>{cantidad}</td>
-                </tr>
+                    <td>{id_producto}</td>
+                    <td>{getCodigoProducto(id_producto).nombre}</td>
+                    <td>{getCodigoProducto(id_producto).marcas}</td>
+                    <td>{id_almacen}</td>
+                    <td>{cantidad}</td>
+                  </tr>
                 )
               })
             }

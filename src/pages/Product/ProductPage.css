@@ -115,6 +115,34 @@ td {
     padding: 20px;
     border-radius: 8px;
     position: relative;
-    min-width: 70%;
+    min-width: 40%;
     min-height: 60%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-modal_Producto{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.form-modal_Producto input{
+    width: 60%;
+    padding: 7px;
+}
+
+.form-modal_Producto button{
+cursor: pointer;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+}
+.buttons button{
+    width: 150px;
+    padding: 10px;
 }

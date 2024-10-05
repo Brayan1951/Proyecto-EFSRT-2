@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import './ProductPage.css'
 import { useEffect } from 'react'
-import { findAllProducts, findByName } from '../../data/Products'
 import { useForm } from '../../hooks/useForm'
 import ModalProducto from './ModalProducto'
+import { useProductStore } from '../../store/productsStore'
+
+
 export default function ProductPage() {
 
 
@@ -12,27 +14,26 @@ export default function ProductPage() {
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
 
-  const [products, setProducts] = useState([])
+
+  const { products, filterProduct, getByName } = useProductStore()
+
+
+  const displayProducts = filterProduct.length > 0 ? filterProduct : products;
 
   const { nombre, changeForm } = useForm({ "nombre": "" })
 
   useEffect(() => {
-    const productos = findAllProducts()
-    console.log(productos);
-    // console.log(findByName("Leche"));
 
-    setProducts(productos)
+    getByName("")
 
-
-
-  }, [])
-
+  }, [products])
+  
 
 
 
   const findProduct = () => {
-    const newProducts = findByName(nombre)
-    setProducts(newProducts)
+     getByName(nombre)
+
   }
 
   return (
@@ -49,14 +50,14 @@ export default function ProductPage() {
 
       </div> */}
 
-      <ModalProducto showModal={showModal} closeModal={closeModal}/>
+      <ModalProducto showModal={showModal} closeModal={closeModal} />
 
       <div className="find-products">
-        <button className='add' onClick={()=>openModal()} >
+        <button className='add' onClick={() => openModal()} >
           <img src='./assets/add-button.png' />
 
         </button>
-        <input type="text" name='nombre' value={nombre} onChange={changeForm} style={{ display: showModal ? 'none' : 'block' }}  />
+        <input type="text" name='nombre' value={nombre} onChange={changeForm} style={{ display: showModal ? 'none' : 'block' }} />
         <button className='find' onClick={findProduct}>
           <img src='./assets/find.png' />
         </button>
@@ -77,7 +78,7 @@ export default function ProductPage() {
 
             {
 
-              products.map(({ id, nombre, marcas, descripcion }, i) => {
+              displayProducts.map(({ id, nombre, marcas, descripcion }, i) => {
                 return (
                   <tr key={i}>
                     <td>{id}</td>
