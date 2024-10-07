@@ -13,7 +13,7 @@ import { productos } from "../assets/data";
 
 export const useProductStore=create((set)=>({
     products:productos,
-    filterProduct:[].length,
+    filterProduct:[],
     
     getByName:(name)=>set((state)=>({filterProduct:state.products.filter(val=>val.nombre.toUpperCase().startsWith(name.toUpperCase()))}))
     ,incrementProduct:(product)=>set((state)=>({products:[...state.products,{...product}]}))

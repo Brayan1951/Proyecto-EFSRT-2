@@ -1,4 +1,4 @@
-const Almacenes=[
+export const Almacenes=[
 
     {
         id:20001,
@@ -124,7 +124,7 @@ export const almacenes_productos=[
         cantidad:5
     },
     {
-        id_almacen:Almacenes[2].id,
+        id_almacen:Almacenes[0].id,
         id_producto:productos[4].id,
         cantidad:5
     },

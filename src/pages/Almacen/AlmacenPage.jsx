@@ -5,17 +5,22 @@ import { useEffect } from 'react'
 import { useAlmacenStore } from '../../store/AlmacenStore'
 import { useProductStore } from '../../store/productsStore'
 import { useForm } from '../../hooks/useForm'
+import { Almacenes, almacenes_productos } from '../../assets/data'
 
 
 
 export default function AlmacenPage() {
 
   const [productAlmacen, setProductAlmacen] = useState([])
-  const { almacen_producto } = useAlmacenStore()
+  const { almacen_producto, filterAlmacen, getbyAlmacen } = useAlmacenStore()
   const { products } = useProductStore()
+  const [almacenes, setAlmacenes] = useState([])
+  const { almacen, nombre, changeForm } = useForm({ almacen: 0, nombre: "" })
 
-  // const [, set] = useState(second)
-  const {almacen,changeForm}=useForm({almacen:0})
+
+  const displayAlmacenProduct = filterAlmacen.length > 0 ? filterAlmacen : almacen_producto;
+
+
 
   function getCodigoProducto(codigo) {
     return products.filter(val => val.id === codigo)[0]
@@ -23,14 +28,25 @@ export default function AlmacenPage() {
 
 
   useEffect(() => {
-
     setProductAlmacen(almacen_producto)
+  }, [])
+  useEffect(() => {
+    setAlmacenes( Almacenes )
 
   }, [])
 
 
+  useEffect(() => {
+    if (filterAlmacen.length > 0) {
+      
+      setProductAlmacen(displayAlmacenProduct)
+    }
+    
+  }, [filterAlmacen])
+  
+
   function FilterData() {
-    console.log(almacen);
+    getbyAlmacen(parseInt(almacen), parseInt(nombre))
     
   }
 
@@ -42,9 +58,14 @@ export default function AlmacenPage() {
         <label htmlFor="">Seleccionar Tienda de Filtro</label>
         <select name='almacen' onChange={changeForm} value={almacen}>
 
-          <option value="1">Todos</option>
-          <option value="2">Callao 01</option>
-          <option value="3">Callao 02</option>
+          <option value={0}>Todos</option>
+          {
+            almacenes.map(({ id, nombre }) => {
+              return <option value={id} key={id}>{nombre}</option>
+
+            })
+          }
+
         </select>
 
       </div>
@@ -53,8 +74,8 @@ export default function AlmacenPage() {
           <img src='./assets/add-button.png'/>
           
         </button> */}
-        <input type="text" />
-        <button className='find' onClick={()=>FilterData()}>
+        <input type="text" name='nombre' value={nombre} onChange={changeForm} />
+        <button className='find' onClick={() => FilterData()}>
           <img src='./assets/find.png' />
         </button>
       </div>
