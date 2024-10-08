@@ -8,3 +8,7 @@
     background-color: #68a76a;
     cursor: pointer;
 }
+
+.modal-content h1{
+margin-bottom: 25px;
+}

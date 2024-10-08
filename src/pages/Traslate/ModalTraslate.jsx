@@ -56,11 +56,19 @@ export default function ModalTraslate({ showModal, closeModal, productSelect, al
                     <div className='modal-page' onClick={closeModal}>
                         <div className="modal-content" onClick={e => e.stopPropagation()}>
                             <div className="form_modal">
+                                {
+                                    <h1>{opcion=="0"?"Traslado de Mercaderia":opcion=="1"?"Salida de Mercaderia":"Ingreso de Mercaderia"}</h1>
+                                }
                                 <div className="form-modal_Producto">
 
                                     <input type="text" disabled value={id} />
                                     <input type="text" disabled value={nombre} />
                                 </div>
+                                <div className="form-modal_Producto">
+                                    <label htmlFor="">Tienda de Origen</label>
+                                    <input type="text" disabled value={almacenOrigen} />
+                                </div>
+                              
                                 <div className="form-modal_Producto">
                                     <label htmlFor="">Stock Disponible</label>
                                     <input type="text" disabled value={ObtenerStock()} />
@@ -69,6 +77,14 @@ export default function ModalTraslate({ showModal, closeModal, productSelect, al
                                     <label htmlFor="">Cantidad a trasladar</label>
                                     <input type="number" min={0} name='cantidad' onChange={changeForm} value={cantidad} />
                                 </div>
+                                {
+                                opcion==0 && 
+                                <div className="form-modal_Producto">
+                                    <label htmlFor="">Tienda de Destino</label>
+                                    <input type="text" disabled value={almacenDestino} />
+                                </div>
+                                
+                                }
 
                             </div>
                             <div className=" buttons">
