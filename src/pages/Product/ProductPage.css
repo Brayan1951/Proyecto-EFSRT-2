@@ -126,6 +126,7 @@ td {
 .form-modal_Producto{
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 15px;
 }
 .form-modal_Producto input{
